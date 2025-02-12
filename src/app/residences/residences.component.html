@@ -1,0 +1,32 @@
+<p>residences works!</p>
+<h1 style="text-align: center; padding: 2%;">Liste des résidences</h1>
+
+<div>
+  <input type="search" placeholder="Rechercher par adresse" [(ngModel)]="searchItem">
+</div>
+
+<div *ngFor="let R of filteredResidences">
+  <div class="row">
+    <div class="card" style="width: 18rem;">
+      <img [src]="R.image" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ R.name }}</h5>
+        <h5 *ngIf="R.showAddress" class="card-title">{{ R.address }}</h5>
+        
+        <p class="card-text">
+          <span *ngIf="R.status === 'Disponible'"> Disponible</span>
+          <span *ngIf="R.status === 'En Construction'"> En Construction</span>
+          <span *ngIf="R.status === 'Vendu'"> Vendu</span>
+        </p>
+
+        <button class="btn btn-primary" (click)="show(R)">Show Location</button>
+        <button class="btn btn-success" (click)="like(R)">Like </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Favoris</h2>
+<ul>
+  <li *ngFor="let fav of favoris">{{ fav.name }}</li>
+</ul>
