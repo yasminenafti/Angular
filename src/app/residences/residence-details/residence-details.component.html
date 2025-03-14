@@ -1,0 +1,20 @@
+<p>residence-details works!</p>
+
+{{id}}
+
+<div *ngIf="R">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" [src]="R.image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{R.name | uppercase}}</h5>
+        <h5 class="card-title">{{R.address}}</h5>
+     <button (click)="showNext()">⏩ Next</button>
+     <!-- Bouton pour ajouter une nouvelle résidence -->
+<button [routerLink]="['/add-residence']">Add Residence</button>
+
+<!-- Bouton pour mettre à jour la résidence (en passant l'ID dans l'URL) -->
+<button [routerLink]="['/add-residence', id]">Update Residence</button>
+    </div>
+
+</div>
+</div>

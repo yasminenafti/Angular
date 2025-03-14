@@ -1,4 +1,4 @@
-<p>residences works!</p>
+
 <h1 style="text-align: center; padding: 2%;">Liste des résidences</h1>
 
 <div>
@@ -12,15 +12,19 @@
       <div class="card-body">
         <h5 class="card-title">{{ R.name }}</h5>
         <h5 *ngIf="R.showAddress" class="card-title">{{ R.address }}</h5>
+
+          <button [routerLink]="['/residence-details', R.id]">Détails</button>
         
         <p class="card-text">
           <span *ngIf="R.status === 'Disponible'"> Disponible</span>
           <span *ngIf="R.status === 'En Construction'"> En Construction</span>
           <span *ngIf="R.status === 'Vendu'"> Vendu</span>
         </p>
+        
 
         <button class="btn btn-primary" (click)="show(R)">Show Location</button>
         <button class="btn btn-success" (click)="like(R)">Like </button>
+        <button class="btn btn-primary" routerLink="/residences/{{R.id}}/apartments">Appartements List</button>
       </div>
     </div>
   </div>
@@ -30,3 +34,4 @@
 <ul>
   <li *ngFor="let fav of favoris">{{ fav.name }}</li>
 </ul>
+<app-add-residence (residenceAdded)="listResidences.push($event)"></app-add-residence>

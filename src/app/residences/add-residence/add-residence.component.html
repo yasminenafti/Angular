@@ -1,0 +1,41 @@
+<h2>Ajouter une Résidence</h2>
+<form [formGroup]="addForm" (ngSubmit)="saveResidence()"> <!-- ✅ Renommé ici -->
+  <div>
+    <label>Nom :</label>
+    <input type="text" formControlName="name">
+    <span *ngIf="addForm.controls.name.invalid && addForm.controls.name.touched" style="color: red;">
+      Nom requis !
+    </span>
+  </div>
+
+  <div>
+    <label>Adresse :</label>
+    <input type="text" formControlName="address">
+    <span *ngIf="addForm.controls.address.invalid && addForm.controls.address.touched" style="color: red;">
+      Adresse requise !
+    </span>
+  </div>
+
+  <div>
+    <label>Image URL :</label>
+    <input type="text" formControlName="image">
+    <span *ngIf="addForm.controls.image.invalid && addForm.controls.image.touched" style="color: red;">
+      Image requise !
+    </span>
+  </div>
+
+  <div>
+    <label>Statut :</label>
+    <select formControlName="status">
+      <option value="">Sélectionnez un statut</option>
+      <option value="Disponible">Disponible</option>
+      <option value="En Construction">En Construction</option>
+      <option value="Vendu">Vendu</option>
+    </select>
+    <span *ngIf="addForm.controls.status.invalid && addForm.controls.status.touched" style="color: red;">
+      Statut requis !
+    </span>
+  </div>
+
+  <button type="submit" [disabled]="addForm.invalid">Ajouter</button>
+</form>

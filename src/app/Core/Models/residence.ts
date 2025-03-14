@@ -4,5 +4,5 @@ export class Residence {
   address!: string;
   image!: string;
   status!: string;
-  showAddress: boolean = false; 
+  showAddress?: boolean; // ✅ Make it optional
 }
