@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // ✅ Added ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { AddResidenceComponent } from './residences/add-residence/add-residence.
 import { ApartmentsComponent } from './apartments/apartments/apartments.component';
 import { ApartmentsByResidenceComponent } from './apartments/apartments-by-residence/apartments-by-residence.component';
 import { AddApartmentComponent } from './apartments/add-apartment/add-apartment.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddApartmentComponent } from './apartments/add-apartment/add-apartment.
     ReactiveFormsModule // ✅ Required for FormGroup and FormControl (Reactive Forms)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] ,
+  
 })
 export class AppModule { }

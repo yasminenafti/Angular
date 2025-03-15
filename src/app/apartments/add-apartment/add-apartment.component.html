@@ -1,1 +1,44 @@
-<p>add-apartment works!</p>
+<form [formGroup]="apartForm" (ngSubmit)="onSubmit()">
+    <label>Apartment Number:</label>
+    <input type="text" formControlName="apartNum">
+    <div *ngIf="isFieldInvalid('apartNum')" class="error">Apartment Number is required and must be a number.</div>
+  
+    <label>Floor Number:</label>
+    <input type="text" formControlName="floorNum">
+    <div *ngIf="isFieldInvalid('floorNum')" class="error">Floor Number is required and must be a number.</div>
+  
+    <label>Surface:</label>
+    <input type="text" formControlName="surface">
+    <div *ngIf="isFieldInvalid('surface')" class="error">Surface is required.</div>
+  
+    <label>Terrace:</label>
+    <input type="radio" formControlName="terrace" [value]="true" (change)="onTerraceChange()"> Yes
+    <input type="radio" formControlName="terrace" [value]="false" (change)="onTerraceChange()"> No
+    
+    <div *ngIf="isFieldInvalid('terrace')" class="error">Please select Yes or No.</div>
+  
+    <label>Surface Terrace:</label>
+    <input type="text" formControlName="surfaceTerrace">
+    <div *ngIf="isFieldInvalid('surfaceTerrace')" class="error">Surface Terrace is required when Terrace is Yes.</div>
+  
+    <label>Category:</label>
+    <input type="radio" formControlName="category" value="S+1"> S+1
+    <input type="radio" formControlName="category" value="S+2"> S+2
+    <input type="radio" formControlName="category" value="S+3"> S+3
+    <div *ngIf="isFieldInvalid('category')" class="error">Please select a category.</div>
+  
+    <label>Residence:</label>
+    <input type="text" formControlName="residenceId">
+    <div *ngIf="isFieldInvalid('residenceId')" class="error">Residence ID is required.</div>
+  
+    <button type="submit" [disabled]="apartForm.invalid">Add</button>
+    <button type="reset" (click)="apartForm.reset()">Reset</button>
+  </form>
+  
+  <style>
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+  

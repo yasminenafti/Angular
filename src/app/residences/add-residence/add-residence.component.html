@@ -1,41 +1,58 @@
-<h2>Ajouter une Résidence</h2>
-<form [formGroup]="addForm" (ngSubmit)="saveResidence()"> <!-- ✅ Renommé ici -->
-  <div>
-    <label>Nom :</label>
-    <input type="text" formControlName="name">
-    <span *ngIf="addForm.controls.name.invalid && addForm.controls.name.touched" style="color: red;">
-      Nom requis !
-    </span>
+<form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" formControlName="id">
+
+  <label for="name">Name:</label>
+  <input id="name" formControlName="name" type="text">
+  <div *ngIf="isFieldInvalid('name')">Le nom doit contenir au moins 3 caractères.</div>
+
+  <label for="address">Address:</label>
+  <input id="address" formControlName="address" type="text">
+  <div *ngIf="isFieldInvalid('address')">L'adresse est obligatoire.</div>
+
+  <label for="image">Image URL:</label>
+  <input id="image" formControlName="image" type="text">
+  <div *ngIf="isFieldInvalid('image')">L'URL de l'image n'est pas valide.</div>
+
+  <label for="status">Status:</label>
+  <select id="status" formControlName="status">
+    <option value="Disponible">Disponible</option>
+    <option value="En Construction">En Construction</option>
+    <option value="Vendu">Vendu</option>
+  </select>
+
+  <h3>Appartements</h3>
+  <button type="button" (click)="addApartment()">+ Ajouter un appartement</button>
+
+  <div formArrayName="apartments">
+    <div *ngFor="let apt of apartments.controls; let i = index" [formGroupName]="i">
+      <h4>Appartement {{ i + 1 }}</h4>
+      
+      <label>Numéro d'appartement:</label>
+      <input type="text" formControlName="apartNum">
+      <div *ngIf="isFieldInvalid('apartNum', apt)">Doit être un nombre.</div>
+
+      <label>Étage:</label>
+      <input type="text" formControlName="floorNum">
+      <div *ngIf="isFieldInvalid('floorNum', apt)">Doit être un nombre.</div>
+
+      <label>Surface:</label>
+      <input type="text" formControlName="surface">
+      <div *ngIf="isFieldInvalid('surface', apt)">Champ obligatoire.</div>
+
+      <label>Terrasse:</label>
+      <input type="checkbox" formControlName="terrace">
+
+      <label>Surface Terrasse:</label>
+      <input type="text" formControlName="surfaceTerrace">
+      <div *ngIf="isFieldInvalid('surfaceTerrace', apt)">Champ obligatoire si terrasse cochée.</div>
+
+      <label>Catégorie:</label>
+      <input type="text" formControlName="category">
+      <div *ngIf="isFieldInvalid('category', apt)">Champ obligatoire.</div>
+
+      <button type="button" (click)="removeApartment(i)">Supprimer</button>
+    </div>
   </div>
 
-  <div>
-    <label>Adresse :</label>
-    <input type="text" formControlName="address">
-    <span *ngIf="addForm.controls.address.invalid && addForm.controls.address.touched" style="color: red;">
-      Adresse requise !
-    </span>
-  </div>
-
-  <div>
-    <label>Image URL :</label>
-    <input type="text" formControlName="image">
-    <span *ngIf="addForm.controls.image.invalid && addForm.controls.image.touched" style="color: red;">
-      Image requise !
-    </span>
-  </div>
-
-  <div>
-    <label>Statut :</label>
-    <select formControlName="status">
-      <option value="">Sélectionnez un statut</option>
-      <option value="Disponible">Disponible</option>
-      <option value="En Construction">En Construction</option>
-      <option value="Vendu">Vendu</option>
-    </select>
-    <span *ngIf="addForm.controls.status.invalid && addForm.controls.status.touched" style="color: red;">
-      Statut requis !
-    </span>
-  </div>
-
-  <button type="submit" [disabled]="addForm.invalid">Ajouter</button>
+  <button type="submit" [disabled]="residenceForm.invalid">Ajouter Résidence</button>
 </form>
